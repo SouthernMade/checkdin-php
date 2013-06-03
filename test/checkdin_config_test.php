@@ -5,6 +5,7 @@ class CheckdinConfigTest {
   function all_tests() {
     self::test_version();
     self::test_api_endpoint();
+    self::test_clientID_required();
   }
 
   function test_version() {
@@ -16,6 +17,17 @@ class CheckdinConfigTest {
     $expected = 'https://app.checkd.in/api/v1';
     $actual = $instance->apiUrl();
     assert_equal($actual, $expected);
+  }
+
+  function test_clientID_required() {
+    $instance = new CheckdinConfig();
+    try {
+      $instance->clientID();
+      fail('Expected exception');
+    } catch (CheckdinConfigError $e) {
+      $success = true;
+    }
+    assert_equal($success, true);
   }
 
 }
