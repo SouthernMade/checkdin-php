@@ -16,7 +16,7 @@ Check out the issue tracker to make sure someone already hasn't requested it and
 
 5. Run all tests by typing <pre>make</pre>
 
-Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+Please try not to mess with the version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 ## Copyright
 Copyright © 2013 checkd.in, Laust Rud Jacobsen. See LICENSE.txt for further details.
