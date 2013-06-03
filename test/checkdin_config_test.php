@@ -9,7 +9,7 @@ class CheckdinConfigTest {
   }
 
   function test_version() {
-    assert_equal(CheckdinConfig::VERSION, '0.0.1');
+    assert_equal(CheckdinConfig::VERSION, '0.1.0');
   }
 
   function test_api_endpoint() {
@@ -32,7 +32,5 @@ class CheckdinConfigTest {
 
 }
 
-$instance = new CheckdinConfigTest();
-$instance->all_tests();
-
+array_push($all_test_classes, CheckdinConfigTest);
 ?>

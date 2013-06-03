@@ -18,7 +18,15 @@ function fail($message = 'fail called') {
   exit(1);
 }
 
+function run_all_tests($test_class) {
+  $test_instance = new $test_class();
+  $test_instance->all_tests();
+}
+
+$all_test_classes = [];
 require_once "checkdin_config_test.php";
+require_once "checkdin_api_test.php";
+array_walk($all_test_classes, 'run_all_tests');
 
 echo "ok\n";
 
