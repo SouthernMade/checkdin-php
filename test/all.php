@@ -12,6 +12,8 @@ function assert_equal($actual, $expected, $message = 'Assertion failed') {
   }
 }
 
+require_once "checkdin_config_test.php";
+
 echo "ok\n";
 
 ?>

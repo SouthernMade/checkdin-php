@@ -1,6 +1,11 @@
 # checkdin API wrapper (php)
 PHP library for interacting with the checkd.in API.
 
+## Getting Started
+
+1. Copy in the files in the <code>inc/</code> directory into your project.
+2. Adjust your copy of <code>inc/checkdin_config.php</code> with your API credentials.
+
 ## Contributing to checkdin
 Check out the latest development to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 

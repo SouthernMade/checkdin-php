@@ -1,4 +1,4 @@
 .PHONY: test
 
 test:
-	php -f test/all.php
+	php -n -f test/all.php
