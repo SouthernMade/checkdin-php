@@ -8,6 +8,7 @@ function assert_equal($actual, $expected, $message = 'Assertion failed') {
     print_r($expected);
     echo "\nActual:   ";
     print_r($actual);
+    echo "\n\n";
     exit(1);
   }
 }
