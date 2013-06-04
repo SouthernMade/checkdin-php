@@ -5,10 +5,14 @@ PHP library for interacting with the checkd.in API.
 
 1. Copy in the files in the <code>inc/</code> directory into your project.
 2. Adjust your copy of <code>inc/checkdin_config.php</code> with your API credentials.
-3. Instantiate <code>CheckdinApi</code> and call the various instance methods. The return values are simple nested hashes, matching the output you see in the [developer documentation](https://developer.checkd.in/).
+3. Instantiate <code>Checkdin\Api</code> and call the various instance methods. The return values are simple nested hashes, matching the output you see in the [developer documentation](https://developer.checkd.in/).
 <pre>
-  $checkdin_api = new CheckdinApi();
-  $users = $checkdin_api->users();
+  $checkdin_api = new Checkdin\Api();
+  $users_page = $checkdin_api->getUsers();
+  for ($user in $users_page) {
+    print_r($user);
+  }
+
 </pre>
 
 ## TODO
