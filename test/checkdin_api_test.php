@@ -3,16 +3,20 @@ require_once 'inc/checkdin_api.php';
 
 // A standin class useful for testing
 class FakeConfig {
-  function __construct($apiBaseUrl) {
+  function __construct($apiBaseUrl,
+                       $clientID = '99',
+                       $clientSecret = '55') {
     $this->apiBaseUrl = $apiBaseUrl;
+    $this->clientID = $clientID;
+    $this->clientSecret = $clientSecret;
   }
 
   function clientID() {
-    return '99';
+    return $this->clientID;
   }
 
   function clientSecret() {
-    return '55';
+    return $this->clientSecret;
   }
 
   function apiBaseUrl() {
