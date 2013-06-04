@@ -41,6 +41,7 @@ class TestRunner {
     $all_test_classes = [];
     require_once "checkdin_config_test.php";
     require_once "checkdin_api_test.php";
+    require_once "checkdin_request_test.php";
     array_walk($all_test_classes, 'run_all_tests');
 
     $this->report_result();
