@@ -7,6 +7,14 @@ class FakeConfig {
     $this->apiBaseUrl = $apiBaseUrl;
   }
 
+  function clientID() {
+    return '99';
+  }
+
+  function clientSecret() {
+    return '55';
+  }
+
   function apiBaseUrl() {
     return $this->apiBaseUrl;
   }
@@ -17,6 +25,9 @@ class CheckdinApiTest {
     self::test_version();
     self::test_default_config_instantiation();
     self::test_specific_config_instantiation();
+
+    self::test_expand_url();
+    self::test_expand_url_no_extra();
   }
 
   function test_version() {
@@ -36,6 +47,28 @@ class CheckdinApiTest {
     $instance = new CheckdinApi($config);
     assert_equal($instance->apiUrlTemplate(), $expected_url);
   }
+
+  function test_expand_url() {
+    $config = new FakeConfig('http://localhost:9030');
+    $instance = new CheckdinApi($config);
+    $data = array(
+      'campaign_id' => 7,
+      'page' => 3,
+      'per_page' => 500
+    );
+    $actual = $instance->expandUrl("/campaigns/{campaign_id}/leaderboard.json", $data);
+    $expected = 'http://localhost:9030/api/v1/campaigns/7/leaderboard.json?client_id=99&client_secret=55&page=3&per_page=500';
+    assert_equal($actual, $expected);
+  }
+
+  function test_expand_url_no_extra() {
+    $config = new FakeConfig('http://localhost:9030');
+    $instance = new CheckdinApi($config);
+    $actual = $instance->expandUrl("/campaigns.json", array());
+    $expected = 'http://localhost:9030/api/v1/campaigns.json?client_id=99&client_secret=55&';
+    assert_equal($actual, $expected);
+  }
+
 
 }
 
