@@ -6,6 +6,10 @@ class RequestError extends \Exception { }
 
 class Request {
   function performGet($url) {
+    return $this->perform('GET', $url, array());
+  }
+
+  function perform($method, $url, $request_body) {
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_USERAGENT, $this->getUserAgent());
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -16,6 +20,11 @@ class Request {
 
     curl_close($curl);
 
+    return $this->parseResponse($response_code, $response_body);
+  }
+
+  // Internal: parse response as JSON or raise an exception on server-reported error
+  function parseResponse($response_code, $response_body) {
     if ($this->successfulResponse($response_code)) {
       return json_decode($response_body, true);
     } else {
