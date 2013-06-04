@@ -1,7 +1,9 @@
 <?php
-class CheckdinConfigError extends Exception { }
+namespace Checkdin;
 
-class CheckdinConfig {
+class ConfigError extends \Exception { }
+
+class Config {
   const VERSION = '0.1.0';
 
   // API Credentials. Replace the TODO string with your actual value
@@ -26,7 +28,7 @@ class CheckdinConfig {
   // Internal bouncer method to ensure the value is configured
   function ensureValueSet($value) {
     if ($value == 'TODO') {
-      throw new CheckdinConfigError("TODO: Open checkdin_config.php and insert your credentials, please");
+      throw new ConfigError("TODO: Open checkdin_config.php and insert your credentials, please");
     } else {
       $value;
     }

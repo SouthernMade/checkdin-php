@@ -31,11 +31,11 @@ class CheckdinApiTest {
   }
 
   function test_version() {
-    assert_equal(CheckdinApi::VERSION, '0.0.1');
+    assert_equal(Checkdin\Api::VERSION, '0.0.1');
   }
 
   function test_default_config_instantiation() {
-    $instance = new CheckdinApi();
+    $instance = new Checkdin\Api();
     $actual = $instance->apiUrlTemplate();
     $expected = 'https://app.checkd.in/api/v1{api_action}?client_id={client_id}&client_secret={client_secret}&{extra_arguments}';
     assert_equal($actual, $expected);
@@ -44,13 +44,13 @@ class CheckdinApiTest {
   function test_specific_config_instantiation() {
     $expected_url = 'http://localhost:9030/api/v1{api_action}?client_id={client_id}&client_secret={client_secret}&{extra_arguments}';
     $config = new FakeConfig('http://localhost:9030');
-    $instance = new CheckdinApi($config);
+    $instance = new Checkdin\Api($config);
     assert_equal($instance->apiUrlTemplate(), $expected_url);
   }
 
   function test_expand_url() {
     $config = new FakeConfig('http://localhost:9030');
-    $instance = new CheckdinApi($config);
+    $instance = new Checkdin\Api($config);
     $data = array(
       'campaign_id' => 7,
       'page' => 3,
@@ -63,12 +63,11 @@ class CheckdinApiTest {
 
   function test_expand_url_no_extra() {
     $config = new FakeConfig('http://localhost:9030');
-    $instance = new CheckdinApi($config);
+    $instance = new Checkdin\Api($config);
     $actual = $instance->expandUrl("/campaigns.json", array());
     $expected = 'http://localhost:9030/api/v1/campaigns.json?client_id=99&client_secret=55&';
     assert_equal($actual, $expected);
   }
-
 
 }
 

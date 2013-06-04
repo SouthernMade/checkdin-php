@@ -9,22 +9,22 @@ class CheckdinConfigTest {
   }
 
   function test_version() {
-    assert_equal(CheckdinConfig::VERSION, '0.1.0');
+    assert_equal(Checkdin\Config::VERSION, '0.1.0');
   }
 
   function test_api_endpoint() {
-    $instance = new CheckdinConfig();
+    $instance = new Checkdin\Config();
     $expected = 'https://app.checkd.in';
     $actual = $instance->apiBaseUrl();
     assert_equal($actual, $expected);
   }
 
   function test_clientID_required() {
-    $instance = new CheckdinConfig();
+    $instance = new Checkdin\Config();
     try {
       $instance->clientID();
       fail('Expected exception');
-    } catch (CheckdinConfigError $e) {
+    } catch (Checkdin\ConfigError $e) {
       $success = true;
     }
     assert_equal($success, true);

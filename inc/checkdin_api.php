@@ -1,7 +1,8 @@
 <?php
+namespace Checkdin;
 require_once 'checkdin_config.php';
 
-class CheckdinApi {
+class Api {
   const VERSION = '0.0.1';
 
   private $config;
@@ -10,7 +11,7 @@ class CheckdinApi {
     if ($config) {
       $this->config = $config;
     } else {
-      $this->config = new CheckdinConfig();
+      $this->config = new Config();
     }
   }
 
