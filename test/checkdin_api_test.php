@@ -21,15 +21,6 @@ class FakeConfig {
 }
 
 class CheckdinApiTest {
-  function all_tests() {
-    self::test_version();
-    self::test_default_config_instantiation();
-    self::test_specific_config_instantiation();
-
-    self::test_expand_url();
-    self::test_expand_url_no_extra();
-  }
-
   function test_version() {
     assert_equal(Checkdin\Api::VERSION, '0.0.1');
   }

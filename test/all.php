@@ -23,7 +23,17 @@ function fail($message = 'fail called') {
 
 function run_all_tests($test_class) {
   $test_instance = new $test_class();
-  $test_instance->all_tests();
+
+  $reflect = new ReflectionClass($test_class);
+  $methods = $reflect->getMethods();
+
+  foreach ($methods as $method) {
+    if (preg_match('/^test_/', $method->getName())) {
+      $method->invoke($test_instance);
+    } else {
+      // echo "Skipping method: {$test_class}->{$method->getName()}";
+    }
+  }
 }
 
 class TestRunner {
