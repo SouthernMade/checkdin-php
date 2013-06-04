@@ -14,11 +14,13 @@ class CheckdinApi {
     }
   }
 
+  // Internal: Template string for all valid API URLs
   function apiUrlTemplate() {
     $base = $this->config->apiBaseUrl();
     return "{$base}/api/v1{api_action}?client_id={client_id}&client_secret={client_secret}&{extra_arguments}";
   }
 
+  // Internal: Build a full URL for invoking an API action
   function expandUrl($api_action, $url_params) {
     $result = $this->apiUrlTemplate();
     $result = str_replace('{api_action}', $api_action, $result);
