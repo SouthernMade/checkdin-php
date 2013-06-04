@@ -28,6 +28,6 @@ require_once "checkdin_config_test.php";
 require_once "checkdin_api_test.php";
 array_walk($all_test_classes, 'run_all_tests');
 
-echo "ok\n";
+echo "\nok\n";
 
 ?>
