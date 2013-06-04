@@ -14,8 +14,8 @@ class CheckdinConfigTest {
 
   function test_api_endpoint() {
     $instance = new CheckdinConfig();
-    $expected = 'https://app.checkd.in/api/v1?client_id={client_id}&client_secret={client_secret}';
-    $actual = $instance->apiUrl();
+    $expected = 'https://app.checkd.in';
+    $actual = $instance->apiBaseUrl();
     assert_equal($actual, $expected);
   }
 
@@ -32,5 +32,5 @@ class CheckdinConfigTest {
 
 }
 
-array_push($all_test_classes, CheckdinConfigTest);
+array_push($all_test_classes, 'CheckdinConfigTest');
 ?>

@@ -1,6 +1,7 @@
 <?php
-error_reporting(E_ALL & E_STRICT);
+error_reporting(-1);
 
+$assertions_failed = 0;
 function assert_equal($actual, $expected, $message = 'Assertion failed') {
   if ($actual != $expected) {
     echo "Error: {$message}\n";
@@ -9,7 +10,9 @@ function assert_equal($actual, $expected, $message = 'Assertion failed') {
     echo "\nActual:   ";
     print_r($actual);
     echo "\n\n";
-    fail("assert_equal failed");
+
+    global $assertions_failed;
+    $assertions_failed++;
   }
 }
 
@@ -23,11 +26,23 @@ function run_all_tests($test_class) {
   $test_instance->all_tests();
 }
 
-$all_test_classes = [];
-require_once "checkdin_config_test.php";
-require_once "checkdin_api_test.php";
-array_walk($all_test_classes, 'run_all_tests');
+function run_tests() {
+  $all_test_classes = [];
+  require_once "checkdin_config_test.php";
+  require_once "checkdin_api_test.php";
+  array_walk($all_test_classes, 'run_all_tests');
 
-echo "\nok\n";
+  report_result();
+}
 
+function report_result() {
+  global $assertions_failed;
+  if ($assertions_failed > 0) {
+    fail("assert_equal failed");
+  } else {
+    echo "\nok\n";
+  }
+}
+
+run_tests();
 ?>

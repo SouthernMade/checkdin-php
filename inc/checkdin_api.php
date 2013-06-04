@@ -14,8 +14,10 @@ class CheckdinApi {
     }
   }
 
-  function apiUrl() {
-    return $this->config->apiUrl();
+  function apiUrlTemplate() {
+    $base = $this->config->apiBaseUrl();
+    return "{$base}/api/v1{api_action}?client_id={client_id}&client_secret={client_secret}&{extra_arguments}";
   }
+
 }
 ?>

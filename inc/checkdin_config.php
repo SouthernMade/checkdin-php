@@ -17,8 +17,10 @@ class CheckdinConfig {
   }
 
   // API endpoint to connect to. Only change this if you are instructed to
-  function apiUrl() {
-    return 'https://app.checkd.in/api/v1?client_id={client_id}&client_secret={client_secret}';
+  function apiBaseUrl() {
+    $protocol = 'https';
+    $hostname = 'app.checkd.in';
+    return "{$protocol}://{$hostname}";
   }
 
   // Internal bouncer method to ensure the value is configured
