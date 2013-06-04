@@ -27,7 +27,7 @@ class CheckdinApiTest {
     $instance = new CheckdinApi();
     $actual = $instance->apiUrl();
     $expected = 'https://app.checkd.in/api/v1';
-    assert_equal($actual, $expected);
+    assert_equal(substr($actual, 0, 28), $expected);
   }
 
   function test_specific_config_instantiation() {
