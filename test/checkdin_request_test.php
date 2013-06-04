@@ -19,9 +19,28 @@ class CheckdinRequestTest {
       fail("Expected exception");
     } catch (Checkdin\RequestError $e) {
       assert_match('/response_code=400/', $e->getMessage());
-      $success = true;
     }
-    assert_equal($success, true);
+  }
+
+  function test_successful_post() {
+    $instance = new Checkdin\Request();
+    $result = $instance->performPost("http://httpbin.org/post", array(
+      'email' => 'bob@example.com'
+    ));
+    assert_equal(
+      $result['json'], # httpbin.org returns a neat JSON result
+      array('email' => 'bob@example.com')
+    );
+  }
+
+  function test_dns_error_reporting() {
+    $instance = new Checkdin\Request();
+    try {
+      $instance->performGet('http://bad_hostname-expecting-no-match.com');
+      fail("Expected exception");
+    } catch (Checkdin\RequestError $e) {
+      assert_match('/curl_errorno=6/', $e->getMessage());
+    }
   }
 
   function test_user_agent() {
