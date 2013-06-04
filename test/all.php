@@ -26,23 +26,25 @@ function run_all_tests($test_class) {
   $test_instance->all_tests();
 }
 
-function run_tests() {
-  $all_test_classes = [];
-  require_once "checkdin_config_test.php";
-  require_once "checkdin_api_test.php";
-  array_walk($all_test_classes, 'run_all_tests');
+class TestRunner {
+  function run() {
+    $all_test_classes = [];
+    require_once "checkdin_config_test.php";
+    require_once "checkdin_api_test.php";
+    array_walk($all_test_classes, 'run_all_tests');
 
-  report_result();
-}
+    $this->report_result();
+  }
 
-function report_result() {
-  global $assertions_failed;
-  if ($assertions_failed > 0) {
-    fail("assert_equal failed");
-  } else {
-    echo "\nok\n";
+  function report_result() {
+    global $assertions_failed;
+    if ($assertions_failed > 0) {
+      fail("assert_equal failed");
+    } else {
+      echo "\nok\n";
+    }
   }
 }
 
-run_tests();
+(new TestRunner())->run();
 ?>
