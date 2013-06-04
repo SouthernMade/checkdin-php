@@ -20,6 +20,18 @@ class FakeConfig {
   }
 }
 
+class FakeRequester {
+  function __construct($supported_url, $response) {
+    $this->supported_url = $supported_url;
+    $this->response = $response;
+  }
+
+  function performGet($url) {
+    assert_equal($this->supported_url, $url);
+    return $this->response;
+  }
+}
+
 class CheckdinApiTest {
   function test_version() {
     assert_equal(Checkdin\Api::VERSION, '0.0.1');
@@ -37,6 +49,18 @@ class CheckdinApiTest {
     $config = new FakeConfig('http://localhost:9030');
     $instance = new Checkdin\Api($config);
     assert_equal($instance->apiUrlTemplate(), $expected_url);
+  }
+
+  function test_get_users() {
+    $config = new FakeConfig('http://localhost:9030');
+    $requester = new FakeRequester(
+      'http://localhost:9030/api/v1/users.json?client_id=99&client_secret=55&',
+      array('thing' => 'more')
+    );
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->getUsers();
+    assert_equal($response, array('thing' => 'more'));
   }
 
   function test_expand_url() {

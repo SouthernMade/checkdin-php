@@ -6,13 +6,24 @@ class Api {
   const VERSION = '0.0.1';
 
   private $config;
+  private $requester;
 
-  function __construct($config = NULL) {
-    if ($config) {
-      $this->config = $config;
-    } else {
-      $this->config = new Config();
+  function __construct($config = NULL, $requester = NULL) {
+    $this->config = $config ? $config : new Config();
+    $this->requester = $requester ? $requester : new Request();
+  }
+
+  function getUsers() {
+    return $this->performRequest("/users.json");
+  }
+
+  // Internal: Expand the url and perform the given request
+  function performRequest($url_action, $url_params = NULL) {
+    if (!$url_params) {
+      $url_params = array();
     }
+    $full_url = $this->expandUrl($url_action, $url_params);
+    return $this->requester->performGet($full_url);
   }
 
   // Internal: Template string for all valid API URLs
