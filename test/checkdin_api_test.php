@@ -34,6 +34,12 @@ class FakeRequester {
     assert_equal($this->supported_url, $url);
     return $this->response;
   }
+
+  function performPost($url) {
+    assert_equal($this->supported_url, $url);
+    return $this->response;
+  }
+
 }
 
 class CheckdinApiTest {
@@ -65,6 +71,27 @@ class CheckdinApiTest {
 
     $response = $instance->getUsers();
     assert_equal($response, array('thing' => 'more'));
+  }
+
+  function test_create_user() {
+    $config = new FakeConfig('http://localhost:3000');
+    $requester = new FakeRequester(
+      'http://localhost:3000/api/v1/users.json?client_id=99&client_secret=55&',
+      array(
+        'user' => array(
+          'id' => 123,
+          'email' => 'joe@example.com'
+        )
+      )
+    );
+    // $requester = new Checkdin\Request();
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->createUser(array(
+      'email' => 'joe@example.com',
+      'identifier' => 'you-know-joe'
+    ));
+    assert_equal($response['user']['email'], 'joe@example.com');
   }
 
   function test_expand_url() {

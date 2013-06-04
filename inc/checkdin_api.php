@@ -14,16 +14,28 @@ class Api {
   }
 
   function getUsers() {
-    return $this->performRequest("/users.json");
+    return $this->performGetRequest("/users.json");
   }
 
-  // Internal: Expand the url and perform the given request
-  function performRequest($url_action, $url_params = NULL) {
-    if (!$url_params) {
-      $url_params = array();
-    }
-    $full_url = $this->expandUrl($url_action, $url_params);
-    return $this->requester->performGet($full_url);
+  function createUser($user_args) {
+    return $this->performPostRequest(
+      "/users.json", array(), $user_args
+    );
+  }
+
+  // Internal: Expand the url and perform the given GET request
+  function performGetRequest($url_action, $url_params = NULL) {
+    return $this->requester->performGet(
+      $this->expandUrl($url_action, $url_params)
+    );
+  }
+
+  // Internal: Expand the url and perform the given POST request
+  function performPostRequest($url_action, $url_params, $body_payload) {
+    return $this->requester->performPost(
+      $this->expandUrl($url_action, $url_params),
+      $body_payload
+    );
   }
 
   // Internal: Template string for all valid API URLs
@@ -34,12 +46,17 @@ class Api {
 
   // Internal: Build a full URL for invoking an API action
   function expandUrl($api_action, $url_params) {
+    if (!$url_params) {
+      $url_params = array();
+    }
+
     $result = $this->apiUrlTemplate();
     $result = str_replace('{api_action}', $api_action, $result);
     $result = str_replace('{client_id}', $this->config->clientID(), $result);
     $result = str_replace('{client_secret}', $this->config->clientSecret(), $result);
 
     $extra_arguments = array();
+
     foreach ($url_params as $url_param => $value) {
       $replace_key = "{{$url_param}}";
       if (strpos($result, $replace_key)) {
