@@ -7,8 +7,24 @@ function assert_equal($actual, $expected, $message = 'Assertion failed') {
     echo "Error: {$message}\n";
     echo "Expected: ";
     print_r($expected);
-    echo "\nActual:   ";
+    echo "\n";
+    echo "Actual:   ";
     print_r($actual);
+    echo "\n\n";
+
+    global $assertions_failed;
+    $assertions_failed++;
+  }
+}
+
+function assert_match($regexp, $input, $message = 'Matching failed') {
+  if (!preg_match($regexp, $input)) {
+    echo "Error: {$message}\n";
+    echo "Expected: ";
+    print_r($input);
+    echo "\n";
+    echo "To match: ";
+    print_r($regexp);
     echo "\n\n";
 
     global $assertions_failed;
