@@ -214,6 +214,23 @@ class CheckdinApiTest {
     assert_equal($response, array('thing' => 'more'));
   }
 
+  function test_get_activities() {
+    $config = new FakeConfig('http://localhost:9030');
+    $requester = new FakeRequester(
+      'http://localhost:9030/api/v1/activities.json?client_id=99&client_secret=55&user_id=27&promotion_id=97&since=9713311',
+      array('thing' => 'more')
+    );
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->getActivities(
+      array(
+        'user_id' => 27,
+        'promotion_id' => 97,
+        'since' => 9713311
+      )
+    );
+    assert_equal($response, array('thing' => 'more'));
+  }
   function test_expand_url() {
     $config = new FakeConfig('http://localhost:9030');
     $instance = new Checkdin\Api($config);

@@ -11,4 +11,5 @@ unreleased:
 * Added: Checkdin\Api->getCampaigns()
 * Added: Checkdin\Api->getCampaign()
 * Added: Checkdin\Api->getCampaignLeaderboard()
+* Added: Checkdin\Api->getActivities()
 * Initial version

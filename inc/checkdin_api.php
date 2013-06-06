@@ -106,6 +106,13 @@ class Api {
     );
   }
 
+  // Get recent activities
+  // invoke GET /api/v1/activities.json
+  // Quite a lot of filteres are available for this, please see documentation
+  function getActivities($filters) {
+    return $this->performGetRequest('activities', $filters);
+  }
+
   // Internal: Expand the url and perform the given GET request
   function performGetRequest($url_action, $url_params = NULL) {
     return $this->requester->performGet(
