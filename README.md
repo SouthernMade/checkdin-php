@@ -13,6 +13,18 @@ PHP library for interacting with the checkd.in API.
     print_r($user);
   }
 
+  $new_user = $checkdin_api->createUser(
+    array(
+      'email' => 'peter@example.com',
+      'identifier' => '3_85289db302dbb099',
+      'first_name' => 'Peter',
+      'last_name' => 'Griffin'
+    )
+  );
+  print_r($new_user);
+  // $new_user['user']['email'] is 'peter@example.com'
+  // $new_user['user']['id'] is the checkd.in assigned unique identifier
+
 </pre>
 
 ## TODO
