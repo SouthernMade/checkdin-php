@@ -13,13 +13,15 @@ class Api {
     $this->requester = $requester ? $requester : new Request();
   }
 
+  // invoke GET /api/v1/users.json
   function getUsers() {
-    return $this->performGetRequest("/users.json");
+    return $this->performGetRequest("users");
   }
 
+  // invoke POST /api/v1/users.json
   function createUser($user_args) {
     return $this->performPostRequest(
-      "/users.json", array(), $user_args
+      "users", array(), $user_args
     );
   }
 
@@ -41,7 +43,7 @@ class Api {
   // Internal: Template string for all valid API URLs
   function apiUrlTemplate() {
     $base = $this->config->apiBaseUrl();
-    return "{$base}/api/v1{api_action}?client_id={client_id}&client_secret={client_secret}&{extra_arguments}";
+    return "{$base}/api/v1/{api_action}.json?client_id={client_id}&client_secret={client_secret}&{extra_arguments}";
   }
 
   // Internal: Build a full URL for invoking an API action
