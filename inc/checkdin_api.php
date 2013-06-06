@@ -54,7 +54,7 @@ class Api {
     );
   }
 
-  // Get point account entries. Can be filtered
+  // Get point account entries
   // invoke GET /api/v1/point_account_entries.json
   // Allowed filter options:
   //   'user_id', 'point_account_id', 'campaign_id'
@@ -65,6 +65,20 @@ class Api {
     return $this->performGetRequest(
       'point_account_entries',
       $restrictions
+    );
+  }
+
+  // Create a custom activity
+  // invoke POST /api/v1/custom_activities
+  function createCustomActivity($user_id, $user_email, $custom_activity_node_id) {
+    return $this->performPostRequest(
+      'custom_activities',
+      array(),
+      array(
+        'user_id' => $user_id,
+        'email' => $user_email,
+        'custom_activity_node_id' => $custom_activity_node_id
+      )
     );
   }
 

@@ -7,4 +7,5 @@ unreleased:
 * Added: Checkdin\Api->getUserAuthentication()
 * Added: Checkdin\Api->createUserAuthentication()
 * Added: Checkdin\Api->getPointAccountEntries()
+* Added: Checkdin\Api->createCustomActivity()
 * Initial version

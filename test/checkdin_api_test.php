@@ -25,9 +25,10 @@ class FakeConfig {
 }
 
 class FakeRequester {
-  function __construct($supported_url, $response) {
+  function __construct($supported_url, $response, $required_arguments = NULL) {
     $this->supported_url = $supported_url;
     $this->response = $response;
+    $this->required_arguments = $required_arguments;
   }
 
   function performGet($url) {
@@ -35,8 +36,9 @@ class FakeRequester {
     return $this->response;
   }
 
-  function performPost($url) {
+  function performPost($url, $post_body) {
     assert_equal($this->supported_url, $url);
+    assert_equal($post_body, $this->required_arguments);
     return $this->response;
   }
 
@@ -82,6 +84,10 @@ class CheckdinApiTest {
           'id' => 123,
           'email' => 'joe@example.com'
         )
+      ),
+      array(
+        'email' => 'joe@example.com',
+        'identifier' => 'you-know-joe'
       )
     );
     $instance = new Checkdin\Api($config, $requester);
@@ -126,6 +132,10 @@ class CheckdinApiTest {
           'id' => 75,
           'additional' => 'details'
         )
+      ),
+      array(
+        'email' => 'joe@example.com',
+        'identifier' => 'you-know-joe'
       )
     );
     $instance = new Checkdin\Api($config, $requester);
@@ -149,6 +159,22 @@ class CheckdinApiTest {
     $instance = new Checkdin\Api($config, $requester);
 
     $response = $instance->getPointAccountEntries(array('user_id' => 31));
+    assert_equal($response, array('thing' => 'more'));
+  }
+
+  function test_create_custom_activity() {
+    $config = new FakeConfig('http://localhost:9030');
+    $requester = new FakeRequester(
+      'http://localhost:9030/api/v1/custom_activities.json?client_id=99&client_secret=55&',
+      array('thing' => 'more'),
+      array(
+        'user_id' => 91,
+        'email' => NULL,
+        'custom_activity_node_id' => 31
+      )
+    );
+    $instance = new Checkdin\Api($config, $requester);
+    $response = $instance->createCustomActivity(91, NULL, 31);
     assert_equal($response, array('thing' => 'more'));
   }
 
