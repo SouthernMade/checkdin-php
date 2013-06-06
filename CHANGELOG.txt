@@ -8,4 +8,7 @@ unreleased:
 * Added: Checkdin\Api->createUserAuthentication()
 * Added: Checkdin\Api->getPointAccountEntries()
 * Added: Checkdin\Api->createCustomActivity()
+* Added: Checkdin\Api->getCampaigns()
+* Added: Checkdin\Api->getCampaign()
+* Added: Checkdin\Api->getCampaignLeaderboard()
 * Initial version

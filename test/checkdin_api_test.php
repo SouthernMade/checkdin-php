@@ -178,6 +178,42 @@ class CheckdinApiTest {
     assert_equal($response, array('thing' => 'more'));
   }
 
+  function test_get_campaigns() {
+    $config = new FakeConfig('http://localhost:9030');
+    $requester = new FakeRequester(
+      'http://localhost:9030/api/v1/campaigns.json?client_id=99&client_secret=55&',
+      array('thing' => 'more')
+    );
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->getCampaigns();
+    assert_equal($response, array('thing' => 'more'));
+  }
+
+  function test_get_campaign() {
+    $config = new FakeConfig('http://localhost:9030');
+    $requester = new FakeRequester(
+      'http://localhost:9030/api/v1/campaigns/71.json?client_id=99&client_secret=55&',
+      array('thing' => 'more')
+    );
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->getCampaign(71);
+    assert_equal($response, array('thing' => 'more'));
+  }
+
+  function test_get_campaign_leaderboard() {
+    $config = new FakeConfig('http://localhost:9030');
+    $requester = new FakeRequester(
+      'http://localhost:9030/api/v1/campaigns/71/leaderboard.json?client_id=99&client_secret=55&',
+      array('thing' => 'more')
+    );
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->getCampaignLeaderboard(71);
+    assert_equal($response, array('thing' => 'more'));
+  }
+
   function test_expand_url() {
     $config = new FakeConfig('http://localhost:9030');
     $instance = new Checkdin\Api($config);

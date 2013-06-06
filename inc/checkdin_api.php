@@ -69,7 +69,7 @@ class Api {
   }
 
   // Create a custom activity
-  // invoke POST /api/v1/custom_activities
+  // invoke POST /api/v1/custom_activities.json
   function createCustomActivity($user_id, $user_email, $custom_activity_node_id) {
     return $this->performPostRequest(
       'custom_activities',
@@ -79,6 +79,30 @@ class Api {
         'email' => $user_email,
         'custom_activity_node_id' => $custom_activity_node_id
       )
+    );
+  }
+
+  // Get all campaigns
+  // invoke GET /api/v1/campaigns.json
+  function getCampaigns() {
+    return $this->performGetRequest('campaigns');
+  }
+
+  // Get details for a single campaign
+  // invoke GET /api/v1/campaign/{campaign_id}.json
+  function getCampaign($campaign_id) {
+    return $this->performGetRequest(
+      'campaigns/{campaign_id}',
+      array('campaign_id' => $campaign_id)
+    );
+  }
+
+  // Get leaderboard for a single campaign
+  // invoke GET /api/v1/campaign/{campaign_id}/leaderboard.json
+  function getCampaignLeaderboard($campaign_id) {
+    return $this->performGetRequest(
+      'campaigns/{campaign_id}/leaderboard',
+      array('campaign_id' => $campaign_id)
     );
   }
 
