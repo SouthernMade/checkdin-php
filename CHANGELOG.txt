@@ -4,4 +4,5 @@ unreleased:
 * Added: Checkdin\Api->getUsers()
 * Added: Checkdin\Api->createUser()
 * Added: Checkdin\Api->getUserAuthentications()
+* Added: Checkdin\Api->getUserAuthentication()
 * Initial version

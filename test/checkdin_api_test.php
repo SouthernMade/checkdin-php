@@ -106,6 +106,19 @@ class CheckdinApiTest {
     assert_equal($response, array('thing' => 'more'));
   }
 
+  function test_get_user_authentication() {
+    $config = new FakeConfig('http://localhost:9030');
+    $requester = new FakeRequester(
+      'http://localhost:9030/api/v1/users/27/authentications/19.json?client_id=99&client_secret=55&',
+      array('thing' => 'more')
+    );
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->getUserAuthentication(27, 19);
+    assert_equal($response, array('thing' => 'more'));
+  }
+
+
   function test_expand_url() {
     $config = new FakeConfig('http://localhost:9030');
     $instance = new Checkdin\Api($config);

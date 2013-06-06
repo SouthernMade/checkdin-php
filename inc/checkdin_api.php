@@ -33,6 +33,17 @@ class Api {
     );
   }
 
+  // GET details for a single authentication for a user
+  function getUserAuthentication($user_id, $authentication_id) {
+    return $this->performGetRequest(
+      "users/{user_id}/authentications/{authentication_id}",
+      array(
+        'user_id' => $user_id,
+        'authentication_id' => $authentication_id
+      )
+    );
+  }
+
   // Internal: Expand the url and perform the given GET request
   function performGetRequest($url_action, $url_params = NULL) {
     return $this->requester->performGet(
