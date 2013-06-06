@@ -66,7 +66,7 @@ class TestRunner {
   function report_result() {
     global $assertions_failed;
     if ($assertions_failed > 0) {
-      fail("assert_equal failed");
+      fail("assertions failed: " . $assertions_failed);
     } else {
       echo "\nok\n";
     }
