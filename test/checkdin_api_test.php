@@ -118,6 +118,29 @@ class CheckdinApiTest {
     assert_equal($response, array('thing' => 'more'));
   }
 
+  function test_create_authentication() {
+    $config = new FakeConfig('http://localhost:3000');
+    $requester = new FakeRequester(
+      'http://localhost:3000/api/v1/users/19/authentications.json?client_id=99&client_secret=55&',
+      array(
+        'authentication' => array(
+          'id' => 75,
+          'additional' => 'details'
+        )
+      )
+    );
+    // $requester = new Checkdin\Request();
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->createUserAuthentication(
+      19,
+      array(
+        'email' => 'joe@example.com',
+        'identifier' => 'you-know-joe'
+      )
+    );
+    assert_equal($response['authentication']['id'], 75);
+  }
 
   function test_expand_url() {
     $config = new FakeConfig('http://localhost:9030');

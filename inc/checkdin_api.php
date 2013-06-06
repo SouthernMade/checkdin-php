@@ -15,32 +15,42 @@ class Api {
 
   // invoke GET /api/v1/users.json
   function getUsers() {
-    return $this->performGetRequest("users");
+    return $this->performGetRequest('users');
   }
 
   // invoke POST /api/v1/users.json
   function createUser($user_args) {
-    return $this->performPostRequest(
-      "users", array(), $user_args
-    );
+    return $this->performPostRequest('users', array(), $user_args);
   }
 
-  // GET authentications for a user
+  // Get authentications for a user
+  // invoke GET /api/v1/users/{user_id}/authentications.json
   function getUserAuthentications($user_id) {
     return $this->performGetRequest(
-      "users/{user_id}/authentications",
+      'users/{user_id}/authentications',
       array('user_id' => $user_id)
     );
   }
 
-  // GET details for a single authentication for a user
+  // Get details for a single authentication for a user
+  // invoke GET /api/v1/users/{user_id}/authentications/{authentication_id}.json
   function getUserAuthentication($user_id, $authentication_id) {
     return $this->performGetRequest(
-      "users/{user_id}/authentications/{authentication_id}",
+      'users/{user_id}/authentications/{authentication_id}',
       array(
         'user_id' => $user_id,
         'authentication_id' => $authentication_id
       )
+    );
+  }
+
+  // Create or update an authentication for a user
+  // invoke POST /api/v1/users/{user_id}/authentications.json
+  function createUserAuthentication($user_id, $authentication_args) {
+    return $this->performPostRequest(
+      'users/{user_id}/authentications',
+      array('user_id' => $user_id),
+      $authentication_args
     );
   }
 
