@@ -84,7 +84,6 @@ class CheckdinApiTest {
         )
       )
     );
-    // $requester = new Checkdin\Request();
     $instance = new Checkdin\Api($config, $requester);
 
     $response = $instance->createUser(array(
@@ -129,7 +128,6 @@ class CheckdinApiTest {
         )
       )
     );
-    // $requester = new Checkdin\Request();
     $instance = new Checkdin\Api($config, $requester);
 
     $response = $instance->createUserAuthentication(
@@ -140,6 +138,18 @@ class CheckdinApiTest {
       )
     );
     assert_equal($response['authentication']['id'], 75);
+  }
+
+  function test_get_point_account_entries() {
+    $config = new FakeConfig('http://localhost:9030');
+    $requester = new FakeRequester(
+      'http://localhost:9030/api/v1/point_account_entries.json?client_id=99&client_secret=55&user_id=31',
+      array('thing' => 'more')
+    );
+    $instance = new Checkdin\Api($config, $requester);
+
+    $response = $instance->getPointAccountEntries(array('user_id' => 31));
+    assert_equal($response, array('thing' => 'more'));
   }
 
   function test_expand_url() {

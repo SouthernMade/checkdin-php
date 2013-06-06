@@ -54,6 +54,20 @@ class Api {
     );
   }
 
+  // Get point account entries. Can be filtered
+  // invoke GET /api/v1/point_account_entries.json
+  // Allowed filter options:
+  //   'user_id', 'point_account_id', 'campaign_id'
+  // This means you can pass in:
+  //   array('user_id' => 37)
+  // and only get point account entries for that $user_id
+  function getPointAccountEntries($restrictions) {
+    return $this->performGetRequest(
+      'point_account_entries',
+      $restrictions
+    );
+  }
+
   // Internal: Expand the url and perform the given GET request
   function performGetRequest($url_action, $url_params = NULL) {
     return $this->requester->performGet(
