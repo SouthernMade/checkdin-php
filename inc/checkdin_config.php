@@ -30,7 +30,7 @@ class Config {
     if ($value == 'TODO') {
       throw new ConfigError("TODO: Open checkdin_config.php and insert your credentials, please");
     } else {
-      $value;
+      return $value;
     }
   }
 }
