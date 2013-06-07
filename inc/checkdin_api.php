@@ -3,7 +3,7 @@ namespace Checkdin;
 require_once 'checkdin_config.php';
 
 class Api {
-  const VERSION = '0.0.1';
+  const VERSION = '0.1.0';
 
   private $config;
   private $requester;
